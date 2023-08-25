@@ -12,7 +12,7 @@
     "axios": "^1.4.0",
     "chai": "^4.3.7",
     "chai-openapi-response-validator": "^0.14.2",
-    "cypress": "^12.17.4",
+    "cypress": "^4.2.0",
     "go-git-it": "^1.0.0",
     "jsonpath": "^1.1.1",
     "mocha": "^10.2.0",
