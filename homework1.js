@@ -13,3 +13,19 @@ console.log(typeof myVariable)
 //( `hello ${"name"}` ) - incorrect
 let name = 'Anna'
 console.log(`hello ${name}`)
+
+let h = 'hello'
+let w = 'world'
+let var3 = `${h} ${w}`
+
+console.log(h + ' ' + w)
+
+let text2 = `I'l take the task "demo" tomorrow`
+
+let text1 = `I'l take the task \"demo"\ tomorrow`
+console.log(text2)
+
+let textMulti = `
+wrewre
+ewrwere
+`
