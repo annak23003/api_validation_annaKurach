@@ -1,6 +1,7 @@
 {
-    "name": "Alex",
-    "lname": "Smith",
-    "age": 33,
-    "city": "New York"
+  "name": "Alex",
+  "lname": "Smith",
+  "age": 33,
+  "city": "New York",
+  "createdAt": "2023-08-31T17:47:39.253Z"
 }

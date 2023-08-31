@@ -13,6 +13,7 @@
     "chai": "^4.3.7",
     "chai-openapi-response-validator": "^0.14.2",
     "cypress": "^4.2.0",
+    "fs-extra": "^11.1.1",
     "go-git-it": "^1.0.0",
     "jsonpath": "^1.1.1",
     "mocha": "^10.2.0",
@@ -24,5 +25,8 @@
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/jsonpath": "^0.2.0"
-  }
+  },
+  "description": "The repo contain test with validation response schema based on openapi documentation.\\ Every time before tests - will be downloaded API schema into nodejs workspace and after check structure of response against fresh version of schema.\\ After running test - will be generated html report in the /mochawesome-report directory.",
+  "main": "first_code.js",
+  "license": "ISC"
 }
