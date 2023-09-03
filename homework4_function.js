@@ -40,7 +40,7 @@ console.log(objData);
 // check the function syntax and if some issues propose
 // let sum == function{a, b} (
 //     return a + b;
-//   )
+// )
 
 let sum = function(a, b) {
     return a + b;
