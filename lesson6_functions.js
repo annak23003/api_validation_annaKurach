@@ -3,7 +3,7 @@ function clickButton() {
     frameworkPlaywirght.clickButton()
 }
 
-function clickButton(selector, 'sss') {
+function clickButton(selector) {
     console.log('Click the element')
     frameworkPlaywirght.clickButton(selector)
 }
