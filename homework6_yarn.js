@@ -12,7 +12,7 @@ const url = 'https://reqres.in/api/users?page=1&per_page=5'
 async function writeData (baseUrl, file) {  
         const response = await fetch(baseUrl);
         const jsonData = await response.json();
-        const result = JSON.stringify(jsonData)
+        const result = JSON.stringify(jsonData);
         
         fs.writeFile(file, result, 'utf8', (err) => {
             if (err) {
