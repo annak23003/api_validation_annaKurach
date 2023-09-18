@@ -1,6 +1,6 @@
 class Human {
     constructor() {
-        if (constructor == Human) {
+        if (this.constructor == Human) {
             throw new Error('it is abstract class')
         } 
     }
