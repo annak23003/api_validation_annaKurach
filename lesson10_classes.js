@@ -1,8 +1,18 @@
-class User {
+class Human {
+    constructor() {
+        if (this.constructor == Human) {
+            throw new Error('it is abstract class')
+        } 
+    }
+    eat(){console.log('eating')}
+    listen() { console.log('listening') }
+};
+class User extends Human {
     _arns = 2;
     fingers = 10;
 
     constructor(name, legs, arns, fingers) {
+        super();
         this.name = name;
         this.#legs = legs;
         this.arns = arns;
@@ -67,3 +77,30 @@ let student3 = new SchoolStudent("mimimi", 2, 2, 9);
 console.log(student3.fingers);
 student3.fingers = 4;
 console.log(student3.fingers);
+
+let animal = {
+    eats: true,
+    walk() {
+        console.log("Тварина їде")
+    },
+    eat() {
+        //
+    }
+}
+
+let rabbit = {
+    jumps: true,
+    eat() {
+        console.log("Rabbit eat some eat")
+    },
+    __proto__: animal
+};
+
+rabbit.walk();
+
+let r2 = {
+    earLength: 5,
+    __proto__: rabbit
+}
+
+rabbit.eat();
