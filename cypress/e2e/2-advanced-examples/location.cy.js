@@ -31,6 +31,8 @@ context('Location', () => {
   })
 })
 
+//fix the selector
+//The test has been modified to run in 1000x660px mode, when the burger menu appears
 context('Check the AIN website', () => {
 
   it('Open the main page and click startups', () => {
