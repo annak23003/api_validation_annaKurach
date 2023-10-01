@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "pretest": "rm -rf 3_0 mochawesome-report && npx go-git-it https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/test/resources/3_0",
-    "test": "mocha --require ts-node/register ./test/**/*.ts --reporter mochawesome"
+    "test": "mocha --require ts-node/register ./test/**/*.ts --reporter mochawesome",
+    "cy:open": "cypress open",
+    "cy:run_chrome": "cypress run --headless -b chrome",
+    "cy:run_chrome_headed": "cypress run --headed -b chrome --env urlFromCli=$ENV_URL"
   },
   "author": "Denys Pavliuk",
   "dependencies": {

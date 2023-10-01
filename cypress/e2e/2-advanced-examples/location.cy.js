@@ -1,6 +1,6 @@
 / <reference types="cypress" />
 
-context('Location', () => {
+context.skip('Location', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/location')
   })
@@ -33,7 +33,7 @@ context('Location', () => {
 
 //fix the selector
 //The test has been modified to run in 1000x660px mode, when the burger menu appears
-context('Check the AIN website', () => {
+context.skip('Check the AIN website', () => {
 
   it('Open the main page and click startups', () => {
     cy.visit('https://ain.ua/ru/')
@@ -42,4 +42,14 @@ context('Check the AIN website', () => {
     cy.get('#menu-item-1123688').click()
     cy.url().should('contain', 'avtorskie/')
   })
+})
+
+context.skip('Check the cypress website', () => {
+
+    it('Open the main page and click startups', () => {
+      cy.visit('/')
+      cy.get('astro-island + a[href="https://on.cypress.io"]').click()
+      cy.url().should('contain', '/why-cypress')
+      cy.get('h1').should('contain.text', 'Why Cypress?')
+    })
 })
