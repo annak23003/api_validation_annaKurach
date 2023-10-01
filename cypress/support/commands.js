@@ -35,3 +35,8 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('loginAndSetCookie', (url, cookieN, cookieV) => {
+    cy.visit(url)
+    cy.setCookie(cookieN, cookieV)
+})
