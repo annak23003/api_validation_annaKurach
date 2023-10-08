@@ -1,5 +1,5 @@
 import { defineConfig } from "cypress";
-const fs = require('fs')
+import fs from 'fs';
 
 export default defineConfig({
   e2e: {
@@ -24,8 +24,29 @@ export default defineConfig({
         }
         return launchOptions;
       });
-   
-      return config
+
+      on('task', {
+        saveUrls: async () => {
+          //const fetch = require('node-fetch');
+          const response = await fetch('https://www.guru99.com');
+          const result = await response.text();
+          
+          //using a regular expression to find matching urls
+          const urls = result.match(/https:\/\/www.guru99.com\/[\w-]+/g) || [];
+    
+          // save urls to a JSON file 
+          fs.writeFileSync('urlsGuru.json', JSON.stringify(urls, null, 2));
+
+        console.log('File is written');
+        
+        return urls;
+      }, 
+        catch (error) {
+          console.error(`Error: ${error}`);
+          throw error;
+        }
+    });
+    return config
     },
   },
 });
