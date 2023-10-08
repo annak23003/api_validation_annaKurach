@@ -1,4 +1,5 @@
 import { defineConfig } from "cypress";
+const fs = require('fs')
 
 export default defineConfig({
   e2e: {
@@ -11,9 +12,19 @@ export default defineConfig({
       runMode: 2
     },
     setupNodeEvents(on, config) {
+      on('task', {log(message) {console.log(message); return null }})
       // implement node event listeners here
       const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
       config.baseUrl = newUrl
+      
+      on("before:browser:launch", (browser, launchOptions) => {
+        console.log(launchOptions.args);
+        if (browser.name === "chrome") {
+          launchOptions.args.push("--incognito");
+        }
+        return launchOptions;
+      });
+   
       return config
     },
   },

@@ -1,15 +1,19 @@
 /// <reference types="cypress" />
 
+import MainPage from "../../pages/main";
+
 describe('Testing guru website', () => {
+    const mainpage = new MainPage();
 
     beforeEach(() => {
-        // cy.visit('https://www.guru99.com')
+         cy.visit('https://www.guru99.com')
         // cy.setCookie('authCoka', 'someCookie')
         cy.loginAndSetCookie('/', 'authCoka', 'someCookie')
     })
 
     it('Open the website guru99', () => {
-        cy.get('h1.thick-heading').should('be.visible');
+        cy.get('h1.thick-heading', {timeout: 6000}).should('be.visible');
+        cy.wait(4000);
     });
 
     it.skip('Check search and validate results', () => {
@@ -33,9 +37,26 @@ describe('Testing guru website', () => {
         .and('have.text', 'Software Testing').click();
         
         cy.get('div.code-block-1 + h2').should('contain', 'Software Testing Training Summary')
-        //.and('have.css', 'margin-top', '0px !important')
         // cy.wait(20000);
         cy.getCookie('authCoka').should('exist');
-    })
+
+        cy.get('p strong').then(($textFundamentalsElement) => {
+            $textFundamentalsElement.text();
+        })
+
+
+        it('open the software from main page', () => {
+            cy.visit('/software-testing.html')
+            cy.log('Opened the soffdsdkflsdfklsdkfl testing page by link')
+            // added command for log mesage with cy.task functionality
+            cy.task('log', 'another message from js code')
+ 
+        })
+
+    });
 });
+    
+
+
+    
 
