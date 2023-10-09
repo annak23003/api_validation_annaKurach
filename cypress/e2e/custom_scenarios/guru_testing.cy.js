@@ -1,9 +1,12 @@
 /// <reference types="cypress" />
 
 import MainPage from "../../pages/main";
+import PostmanPage from "../../pages/postman_page";
+import { global_data } from "../../data/global_text";
 
 describe('Testing guru website', () => {
     const mainpage = new MainPage();
+    const postmanpage = new PostmanPage(); 
 
     beforeEach(() => {
          cy.visit('https://www.guru99.com')
@@ -43,17 +46,28 @@ describe('Testing guru website', () => {
         cy.get('p strong').then(($textFundamentalsElement) => {
             $textFundamentalsElement.text();
         })
-
-
-        it('open the software from main page', () => {
-            cy.visit('/software-testing.html')
-            cy.log('Opened the soffdsdkflsdfklsdkfl testing page by link')
-            // added command for log mesage with cy.task functionality
-            cy.task('log', 'another message from js code')
- 
-        })
-
     });
+
+    it('open the software from main page', () => {
+        cy.visit('/software-testing.html')
+        cy.log('Opened the soffdsdkflsdfklsdkfl testing page by link')
+        // added command for log mesage with cy.task functionality
+        cy.task('log', 'another message from js code')
+    });
+
+    it('click on postman link from dropdownlist POM', () => {
+        mainpage.dropdownlist().eq(0).click();
+        mainpage.elementindropdownlist().eq(16)
+        .should('have.text', global_data.postman_text).click();
+        postmanpage.imagewithPostmanDetails( {timeout: 15000} ).should('be.visible');
+    });
+
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false
+      })
+    
 });
     
 
