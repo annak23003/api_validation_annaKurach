@@ -1,7 +1,15 @@
 import { defineConfig } from "cypress";
+import { configurePlugin } from "cypress-mongodb";
+
 const fs = require('fs')
 
 export default defineConfig({
+  env: {
+    mongodb: {
+      uri: 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2',
+      database: 'test'
+    }
+  },
   e2e: {
     experimentalStudio: true,
     viewportHeight: 900,
@@ -24,7 +32,7 @@ export default defineConfig({
         }
         return launchOptions;
       });
-   
+      configurePlugin(on);
       return config
     },
   },
