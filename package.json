@@ -15,6 +15,7 @@
     "axios": "^1.4.0",
     "chai": "^4.3.7",
     "chai-openapi-response-validator": "^0.14.2",
+    "cypress-mongodb": "^6.2.0",
     "fs-extra": "^11.1.1",
     "go-git-it": "^1.0.0",
     "jsonpath": "^1.1.1",
