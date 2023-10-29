@@ -39,7 +39,7 @@
 Cypress.Commands.add('loginAndSetCookie', (url, cookieN, cookieV) => {
     cy.visit(url)
     cy.setCookie(cookieN, cookieV)
-})
+});
 
 Cypress.Commands.add('loginAndSetLocalStorage', () => {
     cy.request({
@@ -54,7 +54,7 @@ Cypress.Commands.add('loginAndSetLocalStorage', () => {
 		// Store the access token in local
 		localStorage.setItem('auth-token', accessToken);
 	});
-})
+});
 
 Cypress.Commands.add('createNewCategory', (category) => {
 
@@ -70,6 +70,32 @@ Cypress.Commands.add('createNewCategory', (category) => {
             authorization: `${accessToken}`
         }
     }).then((response) => {
+        const categoryId = response.body._id;
+		// Store the categoryId in Cypress environment variable
+        Cypress.env('categoryId', categoryId);
+        
+        return response.body;
+    })
+});
+
+Cypress.Commands.add('createNewPosition', (position) => {
+
+    const accessToken = window.localStorage.getItem('auth-token');
+    const categoryId = Cypress.env('categoryId');
+
+    cy.request({
+        method: 'POST',
+        url: 'api/position',
+        body: {
+            category: categoryId,
+            cost: 1,
+            name: position
+        },
+        headers: {
+            authorization: `${accessToken}`
+        }
+    }).then((response) => {
         return response.body
     })
-})
+});
+
