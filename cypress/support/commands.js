@@ -78,7 +78,7 @@ Cypress.Commands.add('createNewCategory', (category) => {
     })
 });
 
-Cypress.Commands.add('createNewPosition', (position) => {
+Cypress.Commands.add('createNewProduct', (position) => {
 
     const accessToken = window.localStorage.getItem('auth-token');
     const categoryId = Cypress.env('categoryId');
