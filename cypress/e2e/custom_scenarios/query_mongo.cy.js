@@ -13,20 +13,36 @@ describe('Find data', () => {
 
     context('UI & API request', () => {
 
+        it('lodin by UI', () => {
+            cy.request({
+                method: 'POST',
+                url: '/api/users/authenticate',
+                body: {username: "test", password: "qwerty1234"}
+            }).then((response) => {
+                const authToken = response.body.token;
+                Cypress.env('authTokenMongo', authToken);
+            })
+        })
+
         it('create user', () => {
             cy.request({
                 method: 'POST',
                 url: '/api/users/register',
                 headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTNhOWJmMDNkYTQ1NTlmYjkwZjdhZTYiLCJpYXQiOjE2OTgzNDMwMzUsImV4cCI6MTY5ODk0NzgzNX0.TZQzUcR5M0qDjhH7HmP5713sENp_KYM87sq0nCO8MzI'
+                    Authorization: `Bearer ${Cypress.env('authTokenMongo')}`
                 },
                 body: {
-                    firstName: 'fff2',
-                    lastName: 'sss2',
-                    username: 'fff2',
-                    password: 'abc1234'
+                    firstName: 'fff2953',
+                    lastName: 'sss2530',
+                    username: 'fff2530',
+                    password: 'abc1253034'
                 }
             })
+        })
+        it('findMany', () => {
+            cy.findMany({}, { collection: 'users' }).then((mongoresult) => {
+                cy.task('log', mongoresult);
+            });
         })
     })
 })

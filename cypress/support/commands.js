@@ -51,6 +51,8 @@ Cypress.Commands.add('loginAndSetLocalStorage', () => {
 		},
 	}).then((response) => {
 		const accessToken = response.body.token;
+        // store the token in JSON
+       // fs.writeFileSync('token.json', JSON.stringify(accessToken)) 
 		// Store the access token in local
 		localStorage.setItem('auth-token', accessToken);
 	});
@@ -99,3 +101,17 @@ Cypress.Commands.add('createNewProduct', (position) => {
     })
 });
 
+Cypress.Commands.add('removeCategoryById', () => {
+    const accessToken = window.localStorage.getItem('auth-token');
+    const categoryId = Cypress.env('categoryId');
+
+    cy.request({
+        method: 'DELETE',
+        url: `/api/category/${categoryId}`,
+        headers: {
+            authorization: `${accessToken}`
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200);
+    })
+});
