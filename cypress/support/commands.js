@@ -116,6 +116,7 @@ Cypress.Commands.add('removeCategoryById', () => {
     })
 });
 
+
 Cypress.Commands.add('removeCategoryById', () => {
     const accessToken = window.localStorage.getItem('auth-token');
     const categoryId = Cypress.env('categoryId');

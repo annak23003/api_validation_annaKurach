@@ -34,11 +34,12 @@ describe('Find data', () => {
                     Authorization: `Bearer ${Cypress.env('authTokenMongo')}`
                 },
                 body: {
+
                     firstName: faker.person.firstName(),
                     lastName: faker.person.lastName(),
                     username: faker.word.sample(),
                     password: faker.string.alphanumeric()
-                    
+
                 }
             }).then((response) => {
                 expect(response.status).to.eq(200);
