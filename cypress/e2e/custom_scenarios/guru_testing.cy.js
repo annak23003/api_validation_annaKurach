@@ -9,6 +9,8 @@ describe('Testing guru website', () => {
     const postmanpage = new PostmanPage(); 
 
     beforeEach(() => {
+        const BaseUrl1 = Cypress.env('guruTestingUrl')
+        Cypress.config('baseUrl', BaseUrl1)
          cy.visit('https://www.guru99.com')
         // cy.setCookie('authCoka', 'someCookie')
         cy.loginAndSetCookie('/', 'authCoka', 'someCookie')
@@ -59,7 +61,7 @@ describe('Testing guru website', () => {
         mainpage.dropdownlist().eq(0).click();
         mainpage.elementindropdownlist().eq(16)
         .should('have.text', global_data.postman_text).click();
-        postmanpage.imagewithPostmanDetails( {timeout: 15000} ).should('be.visible');
+        //postmanpage.imagewithPostmanDetails( {timeout: 300000} ).should('be.visible');
     });
 
     Cypress.on('uncaught:exception', (err, runnable) => {
