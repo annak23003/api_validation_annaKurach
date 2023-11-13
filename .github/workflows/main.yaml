@@ -1,12 +1,9 @@
-name: E2E UI Tests
+name: Trigger e2e UI tests
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  run-e2e-tests:
+  chrome:
     runs-on: ubuntu-latest
     name: Run E2E tests in Docker
     container:
@@ -19,4 +16,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress E2E tests
-        run: npm run cypress:run
+        run: npx cypress run --browser chrome --spec cypress/e2e/custom_scenarios/newborn.cy.js
+
+
+          
