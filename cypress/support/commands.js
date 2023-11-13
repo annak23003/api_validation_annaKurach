@@ -115,3 +115,21 @@ Cypress.Commands.add('removeCategoryById', () => {
         expect(response.status).to.eq(200);
     })
 });
+
+
+Cypress.Commands.add('removeCategoryById', () => {
+    const accessToken = window.localStorage.getItem('auth-token');
+    const categoryId = Cypress.env('categoryId');
+
+    cy.request({
+        method: 'DELETE',
+        url: `/api/category/${categoryId}`,
+        headers: {
+            authorization: `${accessToken}`
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200);
+    })
+});
+
+

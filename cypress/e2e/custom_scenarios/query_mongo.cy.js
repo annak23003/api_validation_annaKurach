@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { faker } from "@faker-js/faker"
 
 describe('Find data', () => {
 
@@ -25,6 +26,7 @@ describe('Find data', () => {
         })
 
         it('create user', () => {
+            let createdUsername1;
             cy.request({
                 method: 'POST',
                 url: '/api/users/register',
@@ -32,11 +34,28 @@ describe('Find data', () => {
                     Authorization: `Bearer ${Cypress.env('authTokenMongo')}`
                 },
                 body: {
-                    firstName: 'fff2953',
-                    lastName: 'sss2530',
-                    username: 'fff2530',
-                    password: 'abc1253034'
+
+                    firstName: faker.person.firstName(),
+                    lastName: faker.person.lastName(),
+                    username: faker.word.sample(),
+                    password: faker.string.alphanumeric()
+
                 }
+            }).then((response) => {
+                expect(response.status).to.eq(200);
+                createdUsername1 = response.body.username;
+                Cypress.env('createdUsername', createdUsername1);
+                cy.request({
+                    method: 'GET',
+                    url: '/api/users',
+                    headers: {
+                        Authorization: `Bearer ${Cypress.env('authTokenMongo')}`
+                    }
+                    }).then((response) => {
+                        const usernames = response.body.map(users => users.username);
+                        cy.log('Usernames from API Response:', usernames);
+                        expect(usernames).to.include(createdUsername1);
+                    })
             })
         })
         it('findMany', () => {
@@ -46,5 +65,4 @@ describe('Find data', () => {
         })
     })
 })
-
 
