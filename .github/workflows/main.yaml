@@ -7,8 +7,29 @@ jobs:
     runs-on: ubuntu-latest
     name: trigger in chrome
     steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-          spec: cypress/e2e/custom_scenarios/newborn.cy.js
+      # - uses: actions/checkout@v3
+      # - uses: cypress-io/github-action@v5
+      #   with:
+      #     browser: chrome
+      #     spec: cypress/e2e/custom_scenarios/newborn.cy.js
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: actions/setup-docker@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-cypress-image \
+            --build-arg BROWSERS=node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 \
+            -f path/to/your/Dockerfile .
+        working-directory: path/to/your/dockerfile/directory
+
+      - name: Run tests inside Docker container
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            -w /app \
+            my-cypress-image \
+            cypress run --browser chrome --spec cypress/e2e/custom_scenarios/newborn.cy.js
+
