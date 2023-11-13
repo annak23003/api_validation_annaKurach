@@ -1,10 +1,6 @@
 import { defineConfig } from "cypress";
 import { configurePlugin } from "cypress-mongodb";
 import fs from "fs-extra";
-import { configurePlugin } from "cypress-mongodb";
-const fs = require('fs')
-import fs from 'fs';
-
 
 export default defineConfig({
   env: {
