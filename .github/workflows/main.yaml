@@ -22,8 +22,8 @@ jobs:
         run: |
           docker build -t my-cypress-image \
             --build-arg BROWSERS=node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 \
-            -f https://hub.docker.com/layers/cypress/browsers/node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1/images/sha256-c2f9b80afa112a99157b3f4bec793c7651bb9bdc292eb2a79 2e1ed4512763304? context=explore
-        working-directory: https://hub.docker.com/layers/cypress/browsers/node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1/images/sha256-c2f9b80afa112a99157b3f4bec793c7651bb9bdc292eb2a79 2e1ed4512763304? context=explore
+            -f .
+        working-directory: .
 
       - name: Run tests inside Docker container
         run: |
