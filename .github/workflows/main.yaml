@@ -5,10 +5,27 @@ on: push
 jobs:
   chrome:
     runs-on: ubuntu-latest
-    name: trigger in chrome
+    name: Run E2E tests in Docker
+    container:
+      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
     steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run Cypress E2E tests
+        run: npx cypress run --browser chrome --spec cypress/e2e/custom_scenarios/newborn.cy.js
+      - name: Save report
+        uses: actions/upload-artifact@v3
+        with: 
+          path: cypress/reports/html
+          name: Main report
+        if: failure() || success()
+      - name: Get report
+        uses: actions/download-artifact@v3
         with:
-          browser: chrome
-          spec: cypress/e2e/custom_scenarios/newborn.cy.js
+          name: Main report
+        if: failure() || success()
+
+
+          
